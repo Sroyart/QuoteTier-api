@@ -33,6 +33,18 @@ router.get("/quote/:id", (req, res) => {
     });
 });
 
+router.post("/quote", (req, res) => {
+  Quotes.query()
+    .insert({
+      content: req.body.content,
+      likes: 0,
+      dislikes: 0,
+    })
+    .then((quote) => {
+      res.json(quote);
+    });
+});
+
 module.exports = {
   router: router,
 };

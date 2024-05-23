@@ -12,6 +12,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", require("./api/quotes").router);
+app.use("/api", require("./api/comments").router);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

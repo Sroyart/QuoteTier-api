@@ -8,7 +8,7 @@ class Comment extends Model {
     return "comments";
   }
   static get relationMappings() {
-    const Quote = require("./Quote");
+    const Quote = require("./Quotes");
     return {
       writer: {
         relation: Model.BelongsToOneRelation,

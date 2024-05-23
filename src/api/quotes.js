@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Quotes = require("../models/Quotes");
+const Comments = require("../models/Comments");
 
 router.get("/quotes", (req, res) => {
   Quotes.query().then((quotes) => {
@@ -39,6 +40,45 @@ router.post("/quote", (req, res) => {
       content: req.body.content,
       likes: 0,
       dislikes: 0,
+    })
+    .then((quote) => {
+      res.json(quote);
+    });
+});
+
+router.put("/quote/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  Quotes.query()
+    .findById(id)
+    .patch({
+      content: req.body.content,
+    })
+    .then((quote) => {
+      res.json(quote);
+    });
+});
+
+router.put("/quote/like/:id", (req, res) => {
+  console.log(req.body);
+  let id = parseInt(req.params.id);
+  Quotes.query()
+    .findById(id)
+    .patch({
+      likes: req.body.likes,
+      dislikes: req.body.dislikes,
+    })
+    .then((quote) => {
+      res.json(quote);
+    });
+});
+
+router.delete("/quote/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  Comments.query()
+    .delete()
+    .where("quotes_id", id)
+    .then(() => {
+      return Quotes.query().deleteById(id);
     })
     .then((quote) => {
       res.json(quote);

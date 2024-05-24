@@ -62,6 +62,7 @@ router.put("/quote/:id", (req, res) => {
       content: req.body.content,
       author: req.body.author,
     })
+    .returning("*")
     .then((quote) => {
       res.json(quote);
     });

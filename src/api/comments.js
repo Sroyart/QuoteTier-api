@@ -15,6 +15,15 @@ router.post("/comment", (req, res) => {
     });
 });
 
+router.delete("/comment/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  Comments.query()
+    .deleteById(id)
+    .then(() => {
+      res.json({ message: "Comment deleted" });
+    });
+});
+
 module.exports = {
   router: router,
 };

@@ -27,12 +27,12 @@ router.get("/quote/:id", (req, res) => {
       },
     })
     .then((quote) => {
-      console.log(quote);
       res.json({
         quote: {
           id: quote[0].id,
           content: quote[0].content,
           author: quote[0].author,
+          certified: quote[0].certified,
           likes: quote[0].likes,
           dislikes: quote[0].dislikes,
         },
@@ -46,6 +46,7 @@ router.post("/quote", (req, res) => {
     .insert({
       content: req.body.content,
       author: req.body.author,
+      certified: req.body.certified,
       likes: 0,
       dislikes: 0,
     })
@@ -60,6 +61,7 @@ router.put("/quote/:id", (req, res) => {
     .findById(id)
     .patch({
       content: req.body.content,
+      certified: req.body.certified,
       author: req.body.author,
     })
     .returning("*")

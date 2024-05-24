@@ -4,7 +4,6 @@ const router = express.Router();
 const Comments = require("../models/Comments");
 
 router.post("/comment", (req, res) => {
-  console.log(req.body);
   Comments.query()
     .insert({
       content: req.body.content,
